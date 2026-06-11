@@ -13,12 +13,6 @@ __pycache__/
 *.pycache
 PLAN.md
 
-# ── Trained Model ──────────────────────────────────────────────────────────
-# Keep the folder (via .gitkeep) but ignore the binary model file
-models/best_model.pkl
-models/*.pkl
-models/*.joblib
-
 # ── Dataset ────────────────────────────────────────────────────────────────
 # Don't commit raw data — too large and has Kaggle ToS restrictions
 data/
