@@ -19,13 +19,7 @@ An end-to-end machine learning web application that predicts whether a bank loan
 
 ## 🖥️ Live Demo
 
-> _Deploy link will appear here after deployment_
-
----
-
-## 📸 Preview
-
-> _Add a screenshot of the app here_
+> https://huggingface.co/spaces/Abhik021/loan-approval-predictor
 
 ---
 
@@ -91,7 +85,7 @@ loan-predictor/
 ### 1. Clone & install
 
 ```bash
-git clone https://github.com/your-username/loan-predictor.git
+git clone https://github.com/abhik-kundu09/Loan_Approval_Predictor.git
 cd loan-predictor
 pip install -r requirements.txt
 ```
