@@ -1,3 +1,16 @@
+---
+title: Loan Approval Predictor
+emoji: 🏦
+colorFrom: blue
+colorTo: indigo
+sdk: streamlit
+sdk_version: "1.45.1"
+app_file: app.py
+pinned: false
+---
+
+
+
 # 🏦 Loan Approval Predictor
 
 An end-to-end machine learning web application that predicts whether a bank loan application will be **Approved** or **Rejected** — built with FastAPI, Streamlit, and Scikit-learn.
