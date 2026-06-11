@@ -1,0 +1,71 @@
+# ── Virtual Environment ────────────────────────────────────────────────────
+.venv/
+venv/
+env/
+ENV/
+
+# ── Python ─────────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+*.pycache
+PLAN.md
+
+# ── Trained Model ──────────────────────────────────────────────────────────
+# Keep the folder (via .gitkeep) but ignore the binary model file
+models/best_model.pkl
+models/*.pkl
+models/*.joblib
+
+# ── Dataset ────────────────────────────────────────────────────────────────
+# Don't commit raw data — too large and has Kaggle ToS restrictions
+data/
+!data/.gitkeep
+
+# ── Jupyter Notebook Artifacts ─────────────────────────────────────────────
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# ── OS Files ───────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ── IDE / Editor ───────────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.suo
+*.user
+*.swp
+*.swo
+*~
+
+# ── Environment Variables ──────────────────────────────────────────────────
+.env
+.env.local
+.env.*.local
+
+# ── Logs & Temp ────────────────────────────────────────────────────────────
+*.log
+*.tmp
+*.temp
+logs/
+
+# ── Build / Distribution ───────────────────────────────────────────────────
+dist/
+build/
+*.egg-info/
+*.egg
+.eggs/
+
+# ── Testing ────────────────────────────────────────────────────────────────
+.pytest_cache/
+.coverage
+htmlcov/
+coverage.xml
+
+# ── Streamlit ──────────────────────────────────────────────────────────────
+# Keep config.toml but ignore any local secrets
+.streamlit/secrets.toml
