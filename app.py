@@ -1,6 +1,18 @@
 import streamlit as st
 import requests
 import plotly.graph_objects as go
+import threading
+import uvicorn
+
+# ─────────────────────────────────────────
+# Start FastAPI in background thread
+# ─────────────────────────────────────────
+
+def run_api():
+    uvicorn.run("api.main:app", host="0.0.0.0", port=8000)
+
+thread = threading.Thread(target=run_api, daemon=True)
+thread.start()
 
 # ─────────────────────────────────────────
 # Config
@@ -774,6 +786,9 @@ with tab3:
     - Applicants with good credit history have significantly higher approval rates.
     - Income, loan amount, and property area are secondary influencing factors.
 
+    #### System architecture
+    ```
+    Streamlit UI  →  FastAPI backend  →  Trained .pkl model  →  JSON response
     ```
 
     #### Tech stack
