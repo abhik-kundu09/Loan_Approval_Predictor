@@ -13,10 +13,6 @@ __pycache__/
 *.pycache
 PLAN.md
 
-# ── Dataset ────────────────────────────────────────────────────────────────
-# Don't commit raw data — too large and has Kaggle ToS restrictions
-data/
-!data/.gitkeep
 
 # ── Jupyter Notebook Artifacts ─────────────────────────────────────────────
 .ipynb_checkpoints/
