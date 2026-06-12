@@ -50,216 +50,21 @@ if "history" not in st.session_state:
 
 st.markdown("""
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;600&display=swap');
 
-html, body, [class*="css"] { font-family: 'Plus Jakarta Sans', sans-serif; }
-
-/* ── Base ── */
-.main  { background: #0D1117; }
-.block-container { padding-top: 2.8rem; padding-bottom: 2rem; max-width: 1200px; }
-
-/* ── Header ── */
-.loan-header {
-    background: linear-gradient(120deg, #111827 0%, #161B22 60%, #0f1e2e 100%);
-    border: 1px solid #30363D;
-    border-radius: 20px;
-    padding: 1.6rem 2rem;
-    margin-bottom: 1.8rem;
-    margin-top: 0.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1.5rem;
-    flex-wrap: nowrap;
-    min-height: 90px;
-}
-.loan-header-left {
-    display: flex;
-    align-items: center;
-    gap: 1.2rem;
-    flex: 1;
-    min-width: 0;
-}
-.loan-header-icon {
-    width: 52px;
-    height: 52px;
-    min-width: 52px;
-    background: linear-gradient(135deg, #1d4ed8 0%, #0ea5e9 100%);
-    border-radius: 14px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.6rem;
-    box-shadow: 0 0 20px rgba(88,166,255,0.2);
-}
-.loan-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 2.8rem;
-    font-weight: 400;
-    color: #F0F6FF;
-    letter-spacing: 3px;
-    margin: 0;
-    line-height: 1;
-    white-space: nowrap;
-    text-shadow: 0 0 40px rgba(88,166,255,0.15);
-}
-.loan-tagline {
-    font-family: 'DM Sans', sans-serif;
-    color: #58A6FF;
-    font-size: 0.82rem;
-    margin-top: 0.4rem;
-    font-weight: 400;
-    letter-spacing: 0.01em;
-    white-space: nowrap;
-}
-.loan-header-badges {
-    display: flex;
-    gap: 0.7rem;
-    flex-shrink: 0;
-}
-.loan-header-badge {
-    background: rgba(88,166,255,0.06);
-    border: 1px solid rgba(88,166,255,0.15);
-    border-radius: 10px;
-    padding: 0.65rem 1.2rem;
-    text-align: center;
-    white-space: nowrap;
-}
-.loan-badge-val {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 1.3rem;
-    font-weight: 600;
-    color: #93C5FD;
-    line-height: 1;
-    letter-spacing: -0.5px;
-}
-.loan-badge-lbl {
-    font-size: 0.65rem;
-    color: #484F58;
-    margin-top: 0.3rem;
-    text-transform: uppercase;
-    letter-spacing: 0.09em;
-    font-weight: 500;
+html, body, [class*="css"] {
+    font-family: 'Inter', sans-serif;
 }
 
-/* ── KPI strip ── */
-.kpi-row { display: flex; gap: 0.8rem; margin-bottom: 1.8rem; }
-.kpi-card {
-    flex: 1;
-    background: #13181f;
-    border: 1px solid #21272f;
-    border-radius: 14px;
-    padding: 1.3rem 1.2rem 1.1rem;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-}
-.kpi-card::before {
-    content: "";
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, rgba(88,166,255,0.4), transparent);
-}
-.kpi-val {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 1.75rem;
-    font-weight: 600;
-    color: #E6EDF3;
-    letter-spacing: -0.5px;
-    line-height: 1;
-}
-.kpi-lbl {
-    color: #484F58;
-    font-size: 0.72rem;
-    margin-top: 0.5rem;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    font-weight: 500;
-}
-
-/* ── Result banners ── */
-.result-approved {
-    background: linear-gradient(135deg, #0a1a12, #0f2a1a);
-    border: 2px solid #00CC88;
-    border-radius: 18px;
-    padding: 2rem;
-    text-align: center;
-    margin-bottom: 1rem;
-}
-.result-rejected {
-    background: linear-gradient(135deg, #1a0a0a, #2a0f0f);
-    border: 2px solid #FF4B4B;
-    border-radius: 18px;
-    padding: 2rem;
-    text-align: center;
-    margin-bottom: 1rem;
-}
-.result-label {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 2.4rem;
-    font-weight: 400;
-    letter-spacing: 3px;
-}
-.result-approved .result-label { color: #00CC88; }
-.result-rejected .result-label { color: #FF4B4B; }
-.result-name {
-    color: #F0F6FF;
-    font-size: 1.3rem;
-    font-weight: 500;
-    margin-top: 0.3rem;
-}
-.result-meta {
-    color: #484F58;
-    font-size: 0.8rem;
-    margin-top: 0.5rem;
-    font-family: 'JetBrains Mono', monospace;
-    letter-spacing: 0.03em;
-}
-
-@keyframes pulse-green {
-    0%   { box-shadow: 0 0 0 0 #00CC8840; }
-    50%  { box-shadow: 0 0 20px 6px #00CC8830; }
-    100% { box-shadow: 0 0 0 0 #00CC8800; }
-}
-@keyframes pulse-red {
-    0%   { box-shadow: 0 0 0 0 #FF4B4B40; }
-    50%  { box-shadow: 0 0 20px 6px #FF4B4B30; }
-    100% { box-shadow: 0 0 0 0 #FF4B4B00; }
-}
-.result-approved { animation: pulse-green 2s ease-in-out 1; }
-.result-rejected { animation: pulse-red 2s ease-in-out 1; }
-
-/* ── Metric cards ── */
-.metric-card {
-    background: #161B22;
-    border: 1px solid #21272f;
-    border-radius: 14px;
-    padding: 1.2rem 1rem;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-}
-.metric-card .mc-label {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 0.68rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: #484F58;
-    font-weight: 600;
-    margin-bottom: 4px;
-}
-.metric-card .mc-value {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: #E6EDF3;
-    line-height: 1;
+/* ── Page background ── */
+.stApp {
+    background: #0d1117;
+    color: #e6edf3;
 }
 
 /* ── Sidebar ── */
 [data-testid="stSidebar"] {
-    background: #161B22;
+    background: #161b22;
     border-right: 1px solid #30363d;
 }
 [data-testid="stSidebar"] label,
@@ -267,27 +72,125 @@ html, body, [class*="css"] { font-family: 'Plus Jakarta Sans', sans-serif; }
 [data-testid="stSidebar"] .stNumberInput label,
 [data-testid="stSidebar"] .stTextInput label {
     color: #8b949e !important;
-    font-size: 0.72rem;
+    font-size: 0.78rem;
     letter-spacing: 0.04em;
     text-transform: uppercase;
     font-weight: 600;
 }
 [data-testid="stSidebar"] h2,
 [data-testid="stSidebar"] h3 {
-    color: #E6EDF3;
-    font-family: 'Syne', sans-serif;
-    font-weight: 600;
-}
-.sidebar-section-title {
-    font-family: 'Syne', sans-serif;
-    color: #E6EDF3;
-    font-size: 1.1rem;
-    font-weight: 600;
-    margin-bottom: 0.6rem;
-    padding-top: 0.5rem;
+    color: #e6edf3;
 }
 
-/* ── DTI warnings ── */
+/* ── Header banner ── */
+.hero-banner {
+    background: linear-gradient(135deg, #0d1117 0%, #1a2332 50%, #0d1117 100%);
+    border: 1px solid #30363d;
+    border-top: 3px solid #388bfd;
+    padding: 28px 32px;
+    border-radius: 12px;
+    margin-bottom: 24px;
+}
+.hero-banner h1 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: #e6edf3;
+    margin: 0 0 6px 0;
+    letter-spacing: -0.02em;
+}
+.hero-banner p {
+    color: #8b949e;
+    font-size: 0.875rem;
+    margin: 0;
+    font-family: 'IBM Plex Mono', monospace;
+}
+.hero-badge {
+    display: inline-block;
+    background: #1f3a5f;
+    color: #388bfd;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    padding: 3px 10px;
+    border-radius: 20px;
+    border: 1px solid #388bfd40;
+    margin-top: 10px;
+    letter-spacing: 0.06em;
+}
+
+/* ── Result banners ── */
+.result-approved {
+    background: linear-gradient(135deg, #0d2818, #0f3d1d);
+    border: 1px solid #238636;
+    border-left: 4px solid #3fb950;
+    padding: 24px 28px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    animation: pulse-green 2s ease-in-out 1;
+}
+.result-rejected {
+    background: linear-gradient(135deg, #2d1117, #3d1219);
+    border: 1px solid #da3633;
+    border-left: 4px solid #f85149;
+    padding: 24px 28px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    animation: pulse-red 2s ease-in-out 1;
+}
+.result-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+    opacity: 0.7;
+}
+.result-name {
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+}
+.result-approved .result-label { color: #3fb950; }
+.result-approved .result-name  { color: #e6edf3; }
+.result-rejected .result-label { color: #f85149; }
+.result-rejected .result-name  { color: #e6edf3; }
+
+@keyframes pulse-green {
+    0%   { box-shadow: 0 0 0 0 #3fb95040; }
+    50%  { box-shadow: 0 0 20px 6px #3fb95030; }
+    100% { box-shadow: 0 0 0 0 #3fb95000; }
+}
+@keyframes pulse-red {
+    0%   { box-shadow: 0 0 0 0 #f8514940; }
+    50%  { box-shadow: 0 0 20px 6px #f8514930; }
+    100% { box-shadow: 0 0 0 0 #f8514900; }
+}
+
+/* ── Metric cards ── */
+.metric-card {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 10px;
+    padding: 18px 20px;
+    text-align: center;
+}
+.metric-card .mc-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #8b949e;
+    margin-bottom: 8px;
+}
+.metric-card .mc-value {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #e6edf3;
+    line-height: 1;
+}
+
+/* ── Warning / info boxes ── */
 .dti-warning {
     background: #2d1f00;
     border: 1px solid #9e6a03;
@@ -296,7 +199,7 @@ html, body, [class*="css"] { font-family: 'Plus Jakarta Sans', sans-serif; }
     padding: 12px 16px;
     font-size: 0.85rem;
     color: #e3b341;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'IBM Plex Mono', monospace;
     margin-bottom: 16px;
 }
 .dti-ok {
@@ -307,33 +210,15 @@ html, body, [class*="css"] { font-family: 'Plus Jakarta Sans', sans-serif; }
     padding: 12px 16px;
     font-size: 0.85rem;
     color: #3fb950;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'IBM Plex Mono', monospace;
     margin-bottom: 16px;
 }
-
-/* ── Prob bars ── */
-.prob-row { margin: 0.5rem 0; }
-.prob-label {
-    display: flex;
-    justify-content: space-between;
-    font-size: 0.85rem;
-    color: #8B949E;
-    margin-bottom: 0.3rem;
-}
-.prob-bar-bg {
-    background: #21262D;
-    border-radius: 6px;
-    height: 10px;
-    overflow: hidden;
-}
-.prob-bar-approved { background: #00CC88; height: 10px; border-radius: 6px; }
-.prob-bar-rejected { background: #FF4B4B; height: 10px; border-radius: 6px; }
 
 /* ── Empty state ── */
 .empty-state {
     text-align: center;
     padding: 60px 20px;
-    color: #484F58;
+    color: #484f58;
 }
 .empty-state .es-icon {
     font-size: 3rem;
@@ -341,248 +226,112 @@ html, body, [class*="css"] { font-family: 'Plus Jakarta Sans', sans-serif; }
 }
 .empty-state p {
     font-size: 0.9rem;
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    color: #8B949E;
+    font-family: 'IBM Plex Mono', monospace;
 }
 
-/* ── History cards ── */
-.hist-item {
-    background: #161B22;
-    border: 1px solid #30363D;
-    border-radius: 12px;
-    padding: 1rem 1.2rem;
-    margin-bottom: 0.7rem;
-    font-size: 0.88rem;
+/* ── History table ── */
+.history-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.82rem;
+    font-family: 'IBM Plex Mono', monospace;
 }
-.hist-approved { border-left: 3px solid #00CC88; }
-.hist-rejected { border-left: 3px solid #FF4B4B; }
-.hist-meta { color: #484F58; font-size: 0.78rem; margin-top: 0.3rem; }
+.history-table th {
+    background: #161b22;
+    color: #8b949e;
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 8px 12px;
+    border-bottom: 1px solid #30363d;
+    text-align: left;
+}
+.history-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid #21262d;
+    color: #c9d1d9;
+}
+.badge-approved {
+    background: #0d2818;
+    color: #3fb950;
+    border: 1px solid #238636;
+    border-radius: 4px;
+    padding: 2px 8px;
+    font-size: 0.7rem;
+}
+.badge-rejected {
+    background: #2d1117;
+    color: #f85149;
+    border: 1px solid #da3633;
+    border-radius: 4px;
+    padding: 2px 8px;
+    font-size: 0.7rem;
+}
 
 /* ── Tab styling ── */
-.stTabs [data-baseweb="tab-list"] { gap: 0.5rem; }
+.stTabs [data-baseweb="tab-list"] {
+    background: #161b22;
+    border-bottom: 1px solid #30363d;
+    border-radius: 8px 8px 0 0;
+    gap: 0;
+}
 .stTabs [data-baseweb="tab"] {
-    background: #161B22;
-    border-radius: 10px 10px 0 0;
-    border: 1px solid #30363D;
-    color: #8B949E;
+    color: #8b949e;
+    font-size: 0.82rem;
     font-weight: 500;
-    padding: 0.5rem 1.2rem;
+    padding: 10px 20px;
 }
 .stTabs [aria-selected="true"] {
-    background: #1F2937 !important;
-    color: #E6EDF3 !important;
-    border-bottom-color: #1F2937 !important;
+    color: #e6edf3 !important;
+    border-bottom: 2px solid #388bfd !important;
 }
 
-/* ── Buttons ── */
+/* ── Predict button ── */
 .stButton > button {
-    background: linear-gradient(135deg, #1d4ed8 0%, #0ea5e9 100%);
+    background: #1f6feb;
     color: white;
     border: none;
-    border-radius: 10px;
+    border-radius: 8px;
     font-weight: 600;
     font-size: 0.9rem;
     letter-spacing: 0.02em;
-    padding: 12px 20px;
-    transition: all 0.2s;
-    border: 1px solid rgba(255,255,255,0.05);
+    padding: 12px;
+    transition: background 0.2s;
 }
 .stButton > button:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(88,166,255,0.3);
+    background: #388bfd;
 }
 
-/* ── Plotly ── */
+/* ── Divider ── */
+hr { border-color: #30363d; }
+
+/* ── Plotly chart background ── */
 .js-plotly-plot .plotly { background: transparent !important; }
 
-/* ── Info box ── */
-.info-box {
-    background: #161B22;
-    border: 1px solid #30363D;
-    border-left: 3px solid #58A6FF;
-    border-radius: 8px;
-    padding: 0.8rem 1rem;
-    color: #8B949E;
-    font-size: 0.88rem;
-    margin-bottom: 1rem;
+/* ── Footer ── */
+.footer {
+    text-align: center;
+    color: #484f58;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    padding: 20px 0 8px;
+    border-top: 1px solid #21262d;
+    margin-top: 32px;
 }
 
 /* ── Validation error ── */
 .val-error {
-    background: #1a0a0a;
-    border: 1px solid #FF4B4B;
-    border-left: 4px solid #FF4B4B;
+    background: #2d1117;
+    border: 1px solid #da3633;
+    border-left: 4px solid #f85149;
     border-radius: 8px;
     padding: 12px 16px;
-    color: #FF4B4B;
-    font-family: 'JetBrains Mono', monospace;
+    color: #f85149;
+    font-family: 'IBM Plex Mono', monospace;
     font-size: 0.82rem;
     margin-bottom: 16px;
 }
 
-/* ── Footer ── */
-.loan-footer {
-    text-align: center;
-    color: #484F58;
-    font-size: 0.82rem;
-    margin-top: 3rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid #21262D;
-}
-
-/* ── Divider ── */
-hr { border-color: #30363D; }
-
-/* ── Selectbox / Input tweaks ── */
-.stSelectbox > div > div { background: #0D1117 !important; border-color: #30363D !important; border-radius: 8px !important; }
-.stNumberInput > div > div { background: #0D1117 !important; border-color: #30363D !important; border-radius: 8px !important; }
-.stTextInput > div > div { background: #0D1117 !important; border-color: #30363D !important; border-radius: 8px !important; }
-
-/* ── Section title ── */
-.section-title {
-    font-family: 'Syne', sans-serif;
-    color: #E6EDF3;
-    font-size: 1.2rem;
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-}
-
-/* ── About content ── */
-.about-section {
-    background: #161B22;
-    border: 1px solid #30363D;
-    border-radius: 12px;
-    padding: 1.5rem;
-    margin-bottom: 1rem;
-}
-.about-section h4 {
-    font-family: 'Syne', sans-serif;
-    color: #E6EDF3;
-    font-weight: 600;
-    margin-bottom: 0.8rem;
-}
-.about-section p, .about-section li {
-    color: #8B949E;
-    font-size: 0.88rem;
-    line-height: 1.7;
-}
-.about-section code {
-    font-family: 'JetBrains Mono', monospace;
-    color: #58A6FF;
-    background: #0D1117;
-    padding: 2px 6px;
-    border-radius: 4px;
-    font-size: 0.82rem;
-}
-.about-section ul { padding-left: 1.2rem; }
-.about-section li { margin-bottom: 0.3rem; }
-
-/* ── Model perf card in sidebar ── */
-.model-perf-card {
-    background: #0D1117;
-    border: 1px solid #21272f;
-    border-radius: 12px;
-    padding: 1rem 1.1rem;
-    font-size: 0.82rem;
-    color: #484F58;
-    line-height: 2.2;
-    font-family: 'Plus Jakarta Sans', sans-serif;
-}
-.model-perf-card b { color: #8B949E; font-weight: 600; }
-.model-perf-card span { font-family: 'JetBrains Mono', monospace; color: #E6EDF3; font-size: 0.8rem; }
-
-/* ─────────────────────────────────────────
-   MOBILE RESPONSIVE (≤ 768px)
-─────────────────────────────────────────*/
-@media screen and (max-width: 768px) {
-    .block-container {
-        padding-top: 1rem !important;
-        padding-left: 1rem !important;
-        padding-right: 1rem !important;
-        max-width: 100% !important;
-    }
-
-    .loan-header {
-        flex-direction: column;
-        align-items: flex-start;
-        padding: 1.2rem;
-        gap: 1rem;
-        min-height: auto;
-    }
-    .loan-header-left { width: 100%; }
-    .loan-title {
-        font-size: 2rem;
-        white-space: normal;
-        letter-spacing: 1.5px;
-    }
-    .loan-tagline {
-        white-space: normal;
-        font-size: 0.75rem;
-        line-height: 1.5;
-    }
-    .loan-header-badges {
-        width: 100%;
-        flex-wrap: wrap;
-        justify-content: space-between;
-    }
-    .loan-header-badge {
-        flex: 1 1 48%;
-        padding: 0.8rem;
-    }
-    .loan-badge-val { font-size: 1.1rem; }
-
-    .kpi-row { flex-wrap: wrap; gap: 0.8rem; }
-    .kpi-card {
-        flex: 1 1 calc(50% - 0.4rem);
-        min-width: 140px;
-        padding: 1rem;
-    }
-    .kpi-val { font-size: 1.4rem; }
-    .kpi-lbl { font-size: 0.65rem; }
-
-    .result-approved, .result-rejected {
-        padding: 1.5rem 1rem;
-    }
-    .result-label {
-        font-size: 1.8rem;
-        letter-spacing: 2px;
-    }
-    .result-name { font-size: 1.1rem; }
-    .result-meta { font-size: 0.75rem; }
-
-    .metric-card {
-        padding: 1rem 0.8rem;
-    }
-    .metric-card .mc-value { font-size: 1.2rem; }
-
-    .hist-item { padding: 0.9rem; font-size: 0.8rem; }
-    .hist-meta { font-size: 0.72rem; word-break: break-word; }
-
-    .stTabs [data-baseweb="tab-list"] {
-        overflow-x: auto;
-        flex-wrap: nowrap;
-    }
-    .stTabs [data-baseweb="tab"] {
-        min-width: max-content;
-        padding: 0.5rem 0.8rem;
-        font-size: 0.85rem;
-    }
-
-    .stDataFrame { overflow-x: auto; }
-    .js-plotly-plot { width: 100% !important; }
-    [data-testid="metric-container"] { padding: 0.5rem; }
-    .stButton > button { width: 100%; min-height: 44px; font-size: 0.95rem; }
-}
-
-/* Extra small devices */
-@media screen and (max-width: 480px) {
-    .loan-title { font-size: 1.7rem; }
-    .loan-header-icon { width: 45px; height: 45px; font-size: 1.4rem; }
-    .loan-header-badge { flex: 1 1 100%; }
-    .kpi-card { flex: 1 1 100%; }
-    .result-label { font-size: 1.5rem; }
-    .kpi-val { font-size: 1.25rem; }
-}
 </style>
 """, unsafe_allow_html=True)
 
@@ -684,47 +433,43 @@ def make_gauge(approve_p, reject_p):
 def render_history():
     if not st.session_state.history:
         st.markdown("""
-        <div class="info-box" style="text-align:center">
-        No predictions yet in this session. Go to the <b>Prediction</b> tab and run your first analysis.
+        <div style="color:#484f58;font-family:'IBM Plex Mono',monospace;font-size:0.82rem;padding:16px 0;">
+            No predictions yet in this session.
         </div>
         """, unsafe_allow_html=True)
         return
 
-    approved = sum(1 for h in st.session_state.history if h["result"] == "Approved")
-    rejected = len(st.session_state.history) - approved
-
-    cards_html = ""
+    rows = ""
     for entry in reversed(st.session_state.history):
-        cls = "hist-approved" if entry["result"] == "Approved" else "hist-rejected"
-        icon = "✅" if entry["result"] == "Approved" else "❌"
-        cards_html += f"""
-        <div class="hist-item {cls}">
-            <span style="font-weight:600;color:{'#00CC88' if entry['result']=='Approved' else '#FF4B4B'}">{icon} {entry['result']}</span>
-            &nbsp;·&nbsp;
-            <span style="color:#8B949E">{entry['name']}</span>
-            &nbsp;·&nbsp;
-            <span style="color:#8B949E">Confidence: <b style="color:#E6EDF3">{entry['confidence']}</b></span>
-            <div class="hist-meta">₹{entry['income']:,} income · ₹{entry['loan']}K loan · Credit: {entry['credit']}</div>
-        </div>"""
+        badge = (
+            '<span class="badge-approved">APPROVED</span>'
+            if entry["result"] == "Approved"
+            else '<span class="badge-rejected">REJECTED</span>'
+        )
+        rows += f"""
+        <tr>
+            <td>{entry['name']}</td>
+            <td>₹{entry['income']:,}</td>
+            <td>₹{entry['loan']}K</td>
+            <td>{entry['credit']}</td>
+            <td>{badge}</td>
+            <td>{entry['confidence']}</td>
+        </tr>"""
 
     st.markdown(f"""
-    <div class="history-header">
-        <div style="display:flex;gap:0.8rem;flex-wrap:wrap;margin-bottom:1rem;">
-            <div class="kpi-card" style="flex:0 1 auto;min-width:100px;padding:0.8rem 1rem;">
-                <div class="kpi-val" style="font-size:1.3rem;">{len(st.session_state.history)}</div>
-                <div class="kpi-lbl">Total</div>
-            </div>
-            <div class="kpi-card" style="flex:0 1 auto;min-width:100px;padding:0.8rem 1rem;">
-                <div class="kpi-val" style="font-size:1.3rem;color:#00CC88;">{approved}</div>
-                <div class="kpi-lbl">✅ Approved</div>
-            </div>
-            <div class="kpi-card" style="flex:0 1 auto;min-width:100px;padding:0.8rem 1rem;">
-                <div class="kpi-val" style="font-size:1.3rem;color:#FF4B4B;">{rejected}</div>
-                <div class="kpi-lbl">❌ Rejected</div>
-            </div>
-        </div>
-    </div>
-    {cards_html}
+    <table class="history-table">
+        <thead>
+            <tr>
+                <th>Applicant</th>
+                <th>Income</th>
+                <th>Loan</th>
+                <th>Credit</th>
+                <th>Result</th>
+                <th>Confidence</th>
+            </tr>
+        </thead>
+        <tbody>{rows}</tbody>
+    </table>
     """, unsafe_allow_html=True)
 
 
@@ -733,48 +478,10 @@ def render_history():
 # ─────────────────────────────────────────
 
 st.markdown("""
-<div class="loan-header">
-    <div class="loan-header-left">
-        <div class="loan-header-icon">🏦</div>
-        <div>
-            <div class="loan-title">Loan Approval Predictor</div>
-            <div class="loan-tagline">ML-Powered Risk Assessment &nbsp;·&nbsp; FastAPI + Decision Tree</div>
-        </div>
-    </div>
-    <div class="loan-header-badges">
-        <div class="loan-header-badge">
-            <div class="loan-badge-val">614</div>
-            <div class="loan-badge-lbl">Records</div>
-        </div>
-        <div class="loan-header-badge">
-            <div class="loan-badge-val">11</div>
-            <div class="loan-badge-lbl">Features</div>
-        </div>
-    </div>
-</div>
-""", unsafe_allow_html=True)
-
-
-# ── KPI strip ─────────────────────────────────────────────────────────────────
-
-st.markdown("""
-<div class="kpi-row">
-    <div class="kpi-card">
-        <div class="kpi-val">96.3%</div>
-        <div class="kpi-lbl">Best Accuracy (LR)</div>
-    </div>
-    <div class="kpi-card">
-        <div class="kpi-val">95.9%</div>
-        <div class="kpi-lbl">Random Forest</div>
-    </div>
-    <div class="kpi-card">
-        <div class="kpi-val">614</div>
-        <div class="kpi-lbl">Dataset Records</div>
-    </div>
-    <div class="kpi-card">
-        <div class="kpi-val">11</div>
-        <div class="kpi-lbl">Input Features</div>
-    </div>
+<div class="hero-banner">
+    <h1>🏦 Loan Approval Predictor</h1>
+    <p>ML-powered risk assessment · FastAPI + Decision Tree</p>
+    <span class="hero-badge"><strong>PREDICT YOURS</strong></span>
 </div>
 """, unsafe_allow_html=True)
 
@@ -844,26 +551,7 @@ with st.sidebar:
     )
 
     st.divider()
-    predict_btn = st.button("🔮 Run Prediction", use_container_width=True)
-
-    st.markdown("---")
-    st.markdown("**📊 Model Performance**")
-    st.markdown("""
-    <div class="model-perf-card">
-        <b>Logistic Regression</b><span style="float:right">96.31%</span><br>
-        <b>Decision Tree</b><span style="float:right">94.12%</span><br>
-        <b>Random Forest</b><span style="float:right">95.92%</span>
-    </div>
-    """, unsafe_allow_html=True)
-
-    st.markdown("---")
-    st.markdown("""
-    <div style="color:#484F58;font-size:0.78rem;line-height:1.6">
-    <b style="color:#8B949E">About</b><br>
-    Loan approval prediction using supervised ML trained on 614 records with 11 features.
-    Decision Tree selected based on F1-score performance.
-    </div>
-    """, unsafe_allow_html=True)
+    predict_btn = st.button("Run Prediction", use_container_width=True)
 
 
 # ─────────────────────────────────────────
@@ -941,19 +629,15 @@ with tab1:
             if pred == "Approved":
                 st.markdown(f"""
                 <div class="result-approved">
-                    <div style="font-size:3rem;margin-bottom:0.3rem;">✅</div>
-                    <div class="result-label">APPROVED</div>
+                    <div class="result-label">✅ Decision · Approved</div>
                     <div class="result-name">{display_name}</div>
-                    <div class="result-meta">Confidence: {conf*100:.1f}% · Model: {model_used}</div>
                 </div>
                 """, unsafe_allow_html=True)
             else:
                 st.markdown(f"""
                 <div class="result-rejected">
-                    <div style="font-size:3rem;margin-bottom:0.3rem;">❌</div>
-                    <div class="result-label">REJECTED</div>
+                    <div class="result-label">❌ Decision · Rejected</div>
                     <div class="result-name">{display_name}</div>
-                    <div class="result-meta">Confidence: {conf*100:.1f}% · Model: {model_used}</div>
                 </div>
                 """, unsafe_allow_html=True)
 
@@ -976,26 +660,12 @@ with tab1:
 
             st.markdown("<br>", unsafe_allow_html=True)
 
-            # ── Probability breakdown ──
-            approve_pct = approve_p * 100
-            reject_pct = reject_p * 100
-            st.markdown(f"""
-            <div class="prob-row">
-                <div class="prob-label"><span>✅ Approved</span><span>{approve_pct:.1f}%</span></div>
-                <div class="prob-bar-bg"><div class="prob-bar-approved" style="width:{approve_pct}%"></div></div>
-            </div>
-            <div class="prob-row">
-                <div class="prob-label"><span>❌ Rejected</span><span>{reject_pct:.1f}%</span></div>
-                <div class="prob-bar-bg"><div class="prob-bar-rejected" style="width:{reject_pct}%"></div></div>
-            </div>
-            """, unsafe_allow_html=True)
-
             # ── Gauge + details ──
             gcol, dcol = st.columns([1, 1])
 
             with gcol:
                 st.markdown(
-                    "<p style='color:#8b949e;font-family:JetBrains Mono;font-size:0.72rem;"
+                    "<p style='color:#8b949e;font-family:IBM Plex Mono;font-size:0.72rem;"
                     "letter-spacing:0.08em;text-transform:uppercase;margin-bottom:4px;'>"
                     "Risk Gauge</p>",
                     unsafe_allow_html=True,
@@ -1071,21 +741,22 @@ with tab1:
 # ── Tab 2: History ──────────────────────
 
 with tab2:
-    st.markdown("### 🕐 Prediction History")
-    st.markdown('<div class="info-box">Last 5 predictions in this session.</div>', unsafe_allow_html=True)
+    st.markdown(
+        "<p style='color:#8b949e;font-size:0.82rem;font-family:IBM Plex Mono;"
+        "margin-bottom:16px;'>Last 5 predictions in this session.</p>",
+        unsafe_allow_html=True,
+    )
     render_history()
 
 
 # ── Tab 3: About ────────────────────────
 
 with tab3:
-    st.markdown("### ℹ️ About This Project")
-
     a1, a2, a3 = st.columns(3)
     metrics = [
-        (a1, "614",           "Dataset Size"),
-        (a2, "11",            "Input Features"),
-        (a3, "Decision Tree", "Selected Model"),
+        (a1, "614",           "Dataset size"),
+        (a2, "11",            "Input features"),
+        (a3, "Decision Tree", "Selected model"),
     ]
     for col, val, label in metrics:
         with col:
@@ -1099,38 +770,29 @@ with tab3:
     st.markdown("<br>", unsafe_allow_html=True)
 
     st.markdown("""
-    <div class="about-section">
-    <h4>🎯 Objective</h4>
-    <p>Predict whether a bank loan application will be <strong style="color:#00CC88">Approved</strong> or
-    <strong style="color:#FF4B4B">Rejected</strong> using supervised machine learning on the standard
-    Loan Prediction dataset (614 records, binary classification).</p>
-    </div>
+    #### Objective
+    Predict whether a bank loan application will be **Approved** or **Rejected** using supervised
+    machine learning on the standard Loan Prediction dataset (614 records, binary classification).
 
-    <div class="about-section">
-    <h4>🧠 Models Trained</h4>
-    <p>Logistic Regression · Decision Tree · Random Forest</p>
-    <p>Decision Tree was selected as the final model based on F1-score performance on the held-out test set.
-    Decision Trees also offer inherent interpretability — important in a credit-risk context.</p>
-    </div>
+    #### Models trained
+    Logistic Regression · Decision Tree · Random Forest
 
-    <div class="about-section">
-    <h4>📊 Key Insights</h4>
-    <ul>
-    <li><strong>Credit history</strong> is the strongest predictor of approval.</li>
-    <li>Applicants with good credit history have significantly higher approval rates.</li>
-    <li>Income, loan amount, and property area are secondary influencing factors.</li>
-    </ul>
-    </div>
+    #### Why Decision Tree?
+    Selected as the final model based on F1-score performance on the held-out test set.
+    Decision Trees also offer inherent interpretability — important in a credit-risk context.
 
-    <div class="about-section">
-    <h4>🏗️ System Architecture</h4>
-    <p><code>Streamlit UI</code> → <code>FastAPI backend</code> → <code>Trained .pkl model</code> → <code>JSON response</code></p>
-    </div>
+    #### Key insights
+    - **Credit history** is the strongest predictor of approval.
+    - Applicants with good credit history have significantly higher approval rates.
+    - Income, loan amount, and property area are secondary influencing factors.
 
-    <div class="about-section">
-    <h4>🛠️ Tech Stack</h4>
-    <p>Python · Pandas · NumPy · Scikit-learn · FastAPI · Streamlit · Plotly</p>
-    </div>
+    #### System architecture
+    ```
+    Streamlit UI  →  FastAPI backend  →  Trained .pkl model  →  JSON response
+    ```
+
+    #### Tech stack
+    Python · Pandas · NumPy · Scikit-learn · FastAPI · Streamlit · Plotly
     """)
 
 
@@ -1139,7 +801,7 @@ with tab3:
 # ─────────────────────────────────────────
 
 st.markdown("""
-<div class="loan-footer">
-    FastAPI · Streamlit · Scikit-Learn · Plotly &nbsp;|&nbsp; Loan Approval Predictor · Abhik Kundu
+<div class="footer">
+    FastAPI · Streamlit · Scikit-Learn · Plotly — by Abhik Kundu
 </div>
 """, unsafe_allow_html=True)
